@@ -11,11 +11,15 @@ export default class DetailsScreen extends React.Component {
             weight: '',
             height: ''
         };
+
+        this.send_data = this.send_data.bind(this);
     }
 
     send_data = async (props) => {
+
+        //Send POST request to the API to log the user data
         try {
-            await fetch(
+            let response = await fetch(
                 'http://34.73.53.208:3000/user_data', {
                     method: 'POST',
                     headers: {
@@ -30,9 +34,14 @@ export default class DetailsScreen extends React.Component {
                     }),
                 }
             );
+            let user_id_number = await Number(response.toString());
+            
         } catch(error){
             console.error(error);
         }
+
+        //redirect to the instruction screen
+        props.navigation.navigate('Instructions');
     }
 
     render() {
