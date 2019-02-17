@@ -1,0 +1,22 @@
+{
+  "name": "makeuoft_2019",
+  "version": "1.0.0",
+  "description": "MakeUofT 2019 Smart Fitness Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuadsouza/Smart_Fitness.git"
+  },
+  "author": "Joshua D'Souza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshuadsouza/Smart_Fitness/issues"
+  },
+  "homepage": "https://github.com/joshuadsouza/Smart_Fitness#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
