@@ -3,7 +3,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import HomeScreen from './screens/home.js';
 import DetailsScreen from './screens/user_details.js';
 import ExerciseScreen from './screens/exercise.js';
-
+import ExerciseAnalysis from './screens/analysis.js'
 
 const AppNavigator = createStackNavigator({
   Home: {
@@ -14,6 +14,9 @@ const AppNavigator = createStackNavigator({
   },
   Instructions: {
     screen: ExerciseScreen
+  },
+  Analysis: {
+    screen: ExerciseAnalysis 
   }
 },
 {

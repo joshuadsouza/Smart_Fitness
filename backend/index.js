@@ -74,17 +74,52 @@ app.post('/exercise', async (req, res) => {
      });
  
      //Insert into the Database
-     var sql = "INSERT INTO exercise(exercise, sets, reps, weight, date_and_time) VALUES ?";
+     var sql = "INSERT INTO exercise(exercise, sets, reps, weight, start) VALUES ?";
      await connection.query(sql, [package], function(err, result){
          if (err) throw err;
+         var insert_id = result.insertId;
+         res.json({ 'ex_id': insert_id});
+         connection.end();
      });
  
      //End Connection and Print for Record
-     await connection.end();
-     console.log('Exercise Success');
+     //await connection.end();
+     //console.log('Exercise Success');
  
-     //Send a Response
-     res.send('Thank you!');
+     
+})
+
+app.post('/exercise_stop', async (req, res) => {
+    //Get the Variables from the App
+    var exerciseId = req.body.exercise_id;
+    var dt = dateTime.create();
+    var formatted = dt.format('Y-m-d H:M:S');
+
+    //Open a MySQL Connection
+    var connection = await mysql.createConnection({
+        host: process.env.DB_HOST,
+        database: process.env.DB_DATABASE,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD
+    })
+
+    //Connect to the Database
+    await connection.connect(function(err){
+        if (err) throw err;
+    });
+
+    //Insert into the Database
+    var sql = "update exercise set end = ? where exercise_id = ?";
+    await connection.query(sql, [formatted, exerciseId], function(err, result){
+        if (err) throw err;
+    });
+
+    //End Connection and Print for Record
+    await connection.end();
+    console.log('Exercise Success');
+
+    //Send a Response
+    res.send('Thank you!');
 })
 
 app.listen(port, () => console.log('Listening on port 3000.'))
